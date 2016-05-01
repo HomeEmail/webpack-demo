@@ -1,20 +1,23 @@
 var webpack = require('webpack');
-//var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');//提取公共的js
-//var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
+//require('stack-source-map')();
 
 const IS_PRO_MODE = false;
 
 module.exports ={
-	entry: './entry.js'
+	entry: ['./entry.js']
 	,output: {
 		path: __dirname+'/build/'
 		,filename: 'bundle.[name].js'
 		,chunkFilename : 'chunk.[id].js'
 		,publicPath : ''
 	}
+	,devtool: '#cheap-module-eval-source-map'
+    ,devServer: {
+        contentBase: "./build",// webpack-dev-server --inline --hot
+    }
 	,module: {
 		loaders: [
 			{
@@ -31,6 +34,14 @@ module.exports ={
 			}
 		]
 	}
+	,resolve:{
+		extensions:['','.js','.json','.jsx']//想要加载一个js文件时，只要require('common')就可以加载common.js文件了
+	}
+	,externals: {
+		// require("jquery") is external and available
+		//  on the global var jQuery
+		"jquery": "jQuery"
+	}
 	,plugins:(function(){
 		const plus = [];
 		if(IS_PRO_MODE){
@@ -42,13 +53,10 @@ module.exports ={
 				minimize : true,
 				compress: {
 					warnings: false
-				}
-				/*
-
-				 mangle: {
-				 except: ['$super', '$', 'exports', 'require']
-				 }
-				 */
+				},
+                mangle: {
+                    except: ['$super', '$', 'exports', 'require']
+                }
 			}));
 		}
 		plus.push(new webpack.optimize.CommonsChunkPlugin({
@@ -71,8 +79,8 @@ module.exports ={
 		}));
 
 		plus.push(new webpack.HotModuleReplacementPlugin());
-		plus.push(new webpack.NoErrorsPlugin());
-		//plus.push(new CommonsChunkPlugin('common.js'));
+		plus.push(new webpack.NoErrorsPlugin());//用来跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
+
 		return plus;
 	})()
 };
