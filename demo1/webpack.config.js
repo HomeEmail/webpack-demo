@@ -7,7 +7,7 @@ var Clean = require('clean-webpack-plugin');
 const IS_PRO_MODE = false;
 
 module.exports ={
-	entry: ['./entry.js']
+	entry: ['webpack/hot/only-dev-server','./entry.js']
 	,output: {
 		path: __dirname+'/build/'
 		,filename: 'bundle.[name].js'
@@ -16,7 +16,7 @@ module.exports ={
 	}
 	,devtool: '#cheap-module-eval-source-map'
     ,devServer: {
-        contentBase: "./build",// webpack-dev-server --inline --hot
+        contentBase: "./build", // webpack-dev-server --inline --hot
     }
 	,module: {
 		loaders: [
@@ -28,6 +28,16 @@ module.exports ={
 				test:/\.less$/
 				,loader:ExtractTextPlugin.extract(['css','less'])//为了使用ExtractTextPlugin提取css,原来是 style!css!less
 			}
+            ,{
+                test: /\.(js|jsx)$/
+                ,exclude: /node_modules/
+                ,loaders: ['react-hot','babel']
+            }
+            , {
+                //文件加载器，处理文件静态资源
+                test: /\.(woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: 'file-loader?name=./fonts/[name].[ext]'
+            }
 			,{
 				test:/\.(png|jpg|woff|woff2|eot|ttf|svg)$/
 				,loader:'url-loader?limit=8192' //inline base64 URLs for <=8k images, direct URLs for the rest
@@ -40,7 +50,7 @@ module.exports ={
 	,externals: {
 		// require("jquery") is external and available
 		//  on the global var jQuery
-		"jquery": "jQuery"
+		//"jquery": "$"
 	}
 	,plugins:(function(){
 		const plus = [];
@@ -59,6 +69,9 @@ module.exports ={
                 }
 			}));
 		}
+        plus.push(new webpack.ProvidePlugin({ //加载jq 不需要require就可以直接使用$
+            $: 'jquery'
+        }));
 		plus.push(new webpack.optimize.CommonsChunkPlugin({
 			name : "common",
 			filename : "common.[id].js",
