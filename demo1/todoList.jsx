@@ -9,6 +9,7 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {items:['hello','world','click','mee']};
+        this.handleAdd=this.handleAdd.bind(this);//绑定在这里效率更高
     };
     handleAdd(){
         var newItems =
@@ -23,14 +24,14 @@ class TodoList extends React.Component {
     render(){
         var items = this.state.items.map(function(item, i) {
             return (
-                <div key={item} onClick={this.handleRemove.bind(this, i)}>
+                <div key={item+i} onClick={this.handleRemove.bind(this,i)}>
                     {item}
                 </div>
             );
         }.bind(this));
         return (
             <div>
-                <button onClick={this.handleAdd.bind(this)}>Add Item</button>
+                <button onClick={this.handleAdd}>Add Item</button>
                 {items}
             </div>
         );
