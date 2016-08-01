@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
 //require('stack-source-map')();
 
-const IS_PRO_MODE = false;
+const IS_PRO_MODE = true;
 
 module.exports ={
 	entry: ['webpack/hot/only-dev-server','./entry.js']
