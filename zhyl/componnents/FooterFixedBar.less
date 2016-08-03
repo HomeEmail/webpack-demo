@@ -1,0 +1,52 @@
+
+.footerFixedBar-item{
+  width: 25%;
+  height: 100%;
+  display: inline-block;
+  .img{
+    height: 2.6rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .text{
+    height: 1.9rem;
+    line-height: 1.9rem;
+    font-size: 1.2rem;
+  }
+  &.on{
+    .text{
+      color: #39b3b0;
+    }
+  }
+  &:active{
+    .text{
+      color:#39b3b0;
+    }
+  }
+  &.item1{
+    .img{
+      background-image: url("../images/bar_health_file@3x.png");
+    }
+  }
+  &.item1&.on{
+    .img{
+      background-image: url("../images/bar_health_file_sel@3x.png");
+    }
+  }
+  &.item2{
+    .img{
+      background-image: url("../images/bar_reservation@3x.png");
+    }
+  }
+  &.item3{
+    .img{
+      background-image: url("../images/bar_recharge@3x.png");
+    }
+  }
+  &.item4{
+    .img{
+      background-image: url("../images/bar_health_information@3x.png");
+    }
+  }
+}

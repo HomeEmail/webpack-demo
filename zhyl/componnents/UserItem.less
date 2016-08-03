@@ -1,0 +1,70 @@
+
+.userItem{
+  border-radius: 5px;
+  background-color: #00d4b4;
+  margin: 0rem 1rem 1rem 1rem;
+  height: 11rem;
+  padding: 2rem 1rem;
+  color: #FFFFFF;
+  line-height: 3.6rem;
+  .img{
+    width: 7.2rem;
+    float: left;
+    margin-right: 0.8rem;
+  }
+  .name{
+    font-size: 1.6rem;
+    position: relative;
+    &.male{&:after{
+      content: '';
+      position: absolute;
+      height: 1.6rem;
+      width: 1.6rem;
+      right: -2rem;
+      top: 0.2rem;
+      background: url("../images/male@3x.png") no-repeat center;
+      background-size: contain;
+    }}
+    &.female{&:after{
+      content: '';
+      position: absolute;
+      height: 1.6rem;
+      width: 1.6rem;
+      right: -2rem;
+      top: 0.2rem;
+      background: url("../images/Female@3x.png") no-repeat center;
+      background-size: contain;
+    }}
+  }
+  .idno{
+    font-size: 1.6rem;
+  }
+  .infoWrapper{
+    float: left;
+  }
+  .searchReport{
+    float: right;
+    line-height: 1.4rem;
+    padding-top: 1rem;
+    text-align: center;
+    .imgSearch{
+      height: 3.2rem;
+      width: 3.2rem;
+      background: url("../images/search_report@3x.png") no-repeat center;
+      background-size: contain;
+      display: inline-block;
+    }
+    p{
+      font-size: 1.2rem;
+    }
+    &:active{
+      .imgSearch{
+        background: url("../images/search_report_pressed@3x.png") no-repeat center;
+        background-size: contain;
+      }
+      p{
+        color: #fff;
+      }
+    }
+  }
+}
