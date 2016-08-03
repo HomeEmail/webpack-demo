@@ -4,14 +4,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
 //require('stack-source-map')();
 
-const IS_PRO_MODE = true;
+const IS_PRO_MODE = false;
 
+//如果你想你的模块是一个特定的类型就用module.exports。如果你想的模块是一个典型的”实例化对象”就用exports。
 module.exports ={
 	entry: {
 		//hot:['webpack/hot/only-dev-server','./entry.js'],
-		jquery:['jquery'],
-		react:['react'],
-		pro:['./entry.js']
+		//jquery:['jquery'],
+		react:['react','react-dom'],
+		//reactDom:['react-dom'],
+		pro:['./entry.js'],
+		hello:['./helloEntry.js']
 	}
 	,output: {
 		path: __dirname+'/build/'
@@ -19,7 +22,12 @@ module.exports ={
 		,chunkFilename : 'chunk.[name].[hash:8].js'
 		,publicPath : ''
 	}
-	//,devtool: '#cheap-module-eval-source-map' //上线编译要注释这个，避免map冗余代码
+	,devtool: (function(){
+		if(!!IS_PRO_MODE){
+			return null;
+		}
+		return '#cheap-module-eval-source-map';
+	})() //上线编译要注释这个，避免map冗余代码
     ,devServer: {
         contentBase: "./build", // webpack-dev-server --inline --hot
     }
@@ -56,6 +64,7 @@ module.exports ={
 		// require("jquery") is external and available
 		//  on the global var jQuery
 		//"jquery": "$"
+		"zepto":"$"
 	}
 	,plugins:(function(){
 		const plus = [];
@@ -72,10 +81,11 @@ module.exports ={
 
 		}
         plus.push(new webpack.ProvidePlugin({ //加载jq 不需要require就可以直接使用$
-            $: 'jquery'
+            //$: 'jquery'
+            $:'zepto'
         }));
 		plus.push(new webpack.optimize.CommonsChunkPlugin({
-			name : ['jquery','react'],//将公共模块提取
+			name : ['react'],//将公共模块提取
 			//filename : "common.[id].js",
 			minChunks: Infinity //提取所有entry共同依赖的模块
 		}));
@@ -103,16 +113,39 @@ module.exports ={
 			inject : 'body',
 			hash : !IS_PRO_MODE, // 开发环境 添加query hash，避免缓存
 			template : 'index.template.html',
-			chunks:['react','jquery','pro'],//js文件按此排序
+			chunks:['react','pro'],
 			//排序
 			chunksSortMode:function(a,b){
-				var index={'pro':1,'react':3,'jquery':2},
+				var index={'pro':1,'react':2},//js文件按此排序,数字越高排得越前
 					aI=index[a.origins[0].name],
 					bI=index[b.origins[0].name];
 				return aI&&bI?bI-aI:-1;
 			}
 
 		}));
+
+		plus.push(new HtmlWebpackPlugin({
+			title : 'webpack hello',
+			minify : {
+				removeComments : IS_PRO_MODE, // 线上环境开启删除注释
+				collapseWhitespace : IS_PRO_MODE // 线上环境开启压缩
+			},
+			filename : 'hello.html',
+			inject : 'body',
+			hash : !IS_PRO_MODE, // 开发环境 添加query hash，避免缓存
+			template : 'index.template.html',
+			chunks:['react','hello'],//js文件按此排序
+			//排序
+			chunksSortMode:function(a,b){
+				var index={'hello':1,'react':2},
+					aI=index[a.origins[0].name],
+					bI=index[b.origins[0].name];
+				return aI&&bI?bI-aI:-1;
+			}
+
+		}));
+
+
 		if(!IS_PRO_MODE) {
 			plus.push(new webpack.HotModuleReplacementPlugin());
 		}
