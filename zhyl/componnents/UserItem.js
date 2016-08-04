@@ -18,6 +18,10 @@ class UserItem extends React.Component {
     handleClick(e){
         //console.log(e.target);
         //alert(e.target.className);
+        window.location.href='../html/userInfo.html';
+    };
+    gotoReportPage(e){
+        window.location.href='../html/reportInfo.html';
     };
     render(){
         var male=this.props.male||'true';
@@ -27,12 +31,12 @@ class UserItem extends React.Component {
         }
         return (
             <div className="userItem">
-                <img className="img" src={this.props.img} />
-                <div className="infoWrapper">
+                <img className="img" src={this.props.img} onClick={this.handleClick} />
+                <div className="infoWrapper" onClick={this.handleClick} >
                 <span className={sex}>{this.props.name}</span><br/>
                 <span className="idno">ID:{this.props.idno}</span>
                 </div>
-                <div className="searchReport">
+                <div className="searchReport" onClick={this.gotoReportPage}>
                     <div className="imgSearch"></div>
                     <p>查询报告</p>
                 </div>

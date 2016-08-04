@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
 //require('stack-source-map')();
 
-const IS_PRO_MODE = false;
+const IS_PRO_MODE = true;
 
 //如果你想你的模块是一个特定的类型就用module.exports。如果你想的模块是一个典型的”实例化对象”就用exports。
 module.exports ={

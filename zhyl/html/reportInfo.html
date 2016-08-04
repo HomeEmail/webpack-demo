@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit"><!-- 国产双核浏览器，启用极速模式 -->
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="touch-fullscreen" content="yes"/>
+    <title>检测报告查询</title>
+    <link rel="stylesheet" type="text/css" href="./base.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/swiper-3.3.1.min.css" />
+    <style type="text/css">
+        html,body{
+            height: 100%;
+        }
+        .page-reportInfo{
+            height: 100%;
+            padding: 1rem 0rem;
+        }
+        .reportInfo-item-wrapper{
+            padding-left: 4rem;
+            position: relative;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px #eee solid;
+            margin-bottom: 1rem;
+        }
+        .yy-icon{
+            position: absolute;
+            left: 1rem;
+            top: 0rem;
+        }
+        .yy-name-wrapper{
+
+        }
+        .yy-name{
+            color: #444;font-size: 1.4rem;
+            display: inline-block;
+            width: 70%;
+        }
+        .date-text{
+            color: #ccc;font-size: 1.2rem;
+            text-align: right;
+            display: inline-block;
+            width: 30%;
+        }
+        .report-name{
+            color: #26CA87;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 2rem;
+        }
+        .reportImgWrapper{
+
+        }
+        .smallImgItem{
+            width: 30%;
+            margin-right: 2%;
+        }
+        @media (min-width: 370px){
+            .date-text{
+                font-size: 1.4rem;
+            }
+            .report-name{
+                font-size: 1.6rem;
+                line-height: 2.2rem;
+            }
+            .yy-name{
+                font-size: 1.6rem;
+            }
+        }
+        #indexTopBannerBoxWrapper{
+            display: none;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 1.5rem;
+            background-color: rgba(0,0,0,0.7);
+        }
+        #indexTopBannerBox{
+            height: 100%;
+            width: 100%;
+        }
+        #scrollerIndexTopBanner,#scrollerIndexTopBanner .swiper-slide{
+            height: 100%;
+            width: 100%;
+            text-align: center;
+        }
+        #scrollerIndexTopBanner .imgBox{
+            height: 100%;
+            width:100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #slideTopBannerIndicator{
+            text-align: center;
+            bottom: 0px;
+            position: absolute;
+            width: 100%;
+            z-index: 22;
+        }
+        .swiper-pagination-bullet{
+            background: #FFF;
+            opacity: .5;
+        }
+        .swiper-pagination-bullet-active{
+            background-color: #10BF78;
+        }
+        .indexTopBannerBoxWrapper-closeBt{
+            color: #fff;
+            font-size: 1.4rem;
+            padding: .4rem .8rem;
+            /*border: 1px #fff solid;*/
+            border-radius: .4rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            z-index: 33;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-reportInfo">
+        <div class="reportInfo-item-wrapper">
+            <img src="../images/yy_icon1.png" width="30" class="yy-icon">
+            <div class="yy-name-wrapper"><span class="yy-name ellipsis">佛山市第一人民医院</span><span class="date-text">2016-07-26</span></div>
+            <div class="report-name">超声检查</div>
+            <div class="reportImgWrapper">
+                <img src="../images/test1.Jpeg" class="smallImgItem">
+                <img src="../images/test2.Jpeg" class="smallImgItem">
+                <img src="../images/test3.Jpeg" class="smallImgItem">
+            </div>
+        </div>
+        <div class="reportInfo-item-wrapper">
+            <img src="../images/yy_icon3.png" width="30" class="yy-icon">
+            <div class="yy-name-wrapper"><span class="yy-name ellipsis">南方医科大学第一附属医院</span><span class="date-text">2016-07-26</span></div>
+            <div class="report-name">超声检查</div>
+            <div class="reportImgWrapper">
+                <img src="../images/test4.Jpeg" class="smallImgItem">
+                <img src="../images/test5.Jpeg" class="smallImgItem">
+            </div>
+        </div>
+
+
+        <!-- 放大图 -->
+        <div id="indexTopBannerBoxWrapper">
+        <button class="indexTopBannerBoxWrapper-closeBt">关闭</button>
+        <!--banner begin-->
+        <div id="indexTopBannerBox" class="swiper-container">
+            <ul id="scrollerIndexTopBanner" class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <div class="imgBox" style="background-image:url(../images/test1.Jpeg);"></div>
+                </li>
+                <li class="swiper-slide">
+                    <div class="imgBox" style="background-image:url(../images/test2.Jpeg);"></div>
+                </li>
+                <li class="swiper-slide">
+                    <div class="imgBox" style="background-image:url(../images/test3.Jpeg);"></div>
+                </li>
+            </ul>
+            <div id="slideTopBannerIndicator" class="dib-wrapper">
+                <!-- <span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span> -->
+            </div>
+            
+        </div>
+        <!--banner end-->
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="../lib/zepto-1.1.6.js"></script>
+    <script type="text/javascript" src="../lib/swiper-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        var scrollerIndexTopBanner = null;
+        $('.smallImgItem').on('tap',function(e){
+            var s='';
+            $(this).parent().children().each(function(i,n){
+                s+='<li class="swiper-slide"><div class="imgBox" style="background-image:url('+$(n).attr('src')+');"></div></li>';
+            });
+            $('#scrollerIndexTopBanner').html(s);
+            $('#indexTopBannerBoxWrapper').show();
+            scrollerIndexTopBanner = new Swiper('#indexTopBannerBox',{
+                pagination: '#slideTopBannerIndicator',
+                paginationClickable: true,
+                slidesPerView: 1,
+                loop: true
+                //autoplay:8000,
+                //onFirstInit:bannerPageChangeTips,
+                //onSlideChangeEnd:bannerPageChangeTips
+            });
+        });
+        $('.indexTopBannerBoxWrapper-closeBt').on('tap',function(e){
+            scrollerIndexTopBanner.destroy();
+            scrollerIndexTopBanner=null;
+            $('#indexTopBannerBoxWrapper').hide();
+        });
+    </script>
+</body>
+</html>

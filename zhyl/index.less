@@ -16,7 +16,31 @@ body,html{
 .userItemWrapper{
   padding-top: 1rem;
   padding-bottom: 5.6rem;
+  height: 100%;
 }
 #homePage,.page1{
   height: 100%;
+  position: relative;
+}
+.page1{
+	.add_friend_btn{
+		background-color: #def8f8;
+		border-radius: 20px;
+		color: #04acb6;
+		width: 55%;
+		padding: 1rem 1.6rem;
+		text-align: center;
+		margin: 2rem auto;
+		line-height: 2.2rem;
+		.add_friend_btn_icon{
+			height: 2.2rem;
+		}
+		span{
+			font-size: 1.6rem;
+			padding-left: 1rem;
+		}
+		&:active{
+			background-color: #D1F9F9;
+		}
+	}
 }
