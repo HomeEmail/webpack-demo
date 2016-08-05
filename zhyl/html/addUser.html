@@ -143,5 +143,68 @@
     </div>
 
     <script type="text/javascript" src="../lib/zepto-1.1.6.js"></script>
+    <script type="text/javascript">
+
+$('.qrIcon-wrapper').on('tap',function(e){
+    getDeviceType(function(){
+        toAndroid();
+    },function(){
+        toIos();
+    });
+});
+
+
+function toIos(callback) { // 
+    setupWebViewJavascriptBridge(function(bridge) {
+        bridge.callHandler('scan',
+            {"wabp_result":"000"},
+            function responseCallback(responseData) {
+                alert("JS received response:" + responseData);
+            }
+        );
+    }); 
+    !!callback&&callback();                  
+}
+function toAndroid(callback) { // 
+    var data={"wabp_result":"001"};
+    window.android.scan(data);
+    !!callback&&callback();                        
+}
+function receiveSanResult(s){
+    alert(s);
+}
+
+
+
+
+function getDeviceType(androidFun,iosFun){
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if (!!isAndroid ){
+        !!androidFun&&androidFun(); 
+        return  
+    } 
+    if (!!isIos){
+        !!iosFun&&iosFun(); 
+        return  
+    }   
+}
+
+function setupWebViewJavascriptBridge(callback) {
+    if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+    if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+    window.WVJBCallbacks = [callback];
+    var WVJBIframe = document.createElement('iframe');
+    WVJBIframe.style.display = 'none';
+    WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+    document.documentElement.appendChild(WVJBIframe);
+    setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+}
+
+
+
+
+    </script>
 </body>
 </html>
