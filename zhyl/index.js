@@ -1,13 +1,16 @@
 
 import app_less from './base.less';
-import './index.less';
 
 import React from 'react';
-import ReactDom from 'react-dom';
-import FooterFixedBar from './componnents/FooterFixedBar';
-import UserItem from './componnents/UserItem';
+//import ReactDom from 'react-dom';
+import {render} from 'react-dom';
+
+import { Router, Route, IndexRoute, Link,browserHistory, hashHistory } from 'react-router';
 
 
+import Home from './componnents/home';
+import HomeContent from './componnents/homeContent';
+import Register from './componnents/register';
 
 //var $ = require('jquery');//webpack.config.js里配置好插件后不需要require就可以直接使用$
 //
@@ -16,9 +19,6 @@ $('body').append('<div id="homePage"></div>');
 //
 //$('body').append('<div class="loadingTips">loading...</div>');
 
-import defaultUserPic from './images/default_user_pic@2x.png';
-import add_friend_btn from './images/add_friend_btn2.png';
-
 
 //ReactDom.render(
 //    <FooterFixedBar />,
@@ -26,20 +26,27 @@ import add_friend_btn from './images/add_friend_btn2.png';
 //);
 
 
-ReactDom.render(
-    <div className="page1">
-        <div className="userItemWrapper overflow-scroll-y">
-            <UserItem name="黄小花" img={defaultUserPic} male="false" idno="395893284"/>
-            <UserItem name="李小敏" img={defaultUserPic} male="false" idno="395593284"/>
-            <UserItem name="小明" img={defaultUserPic} male="true" idno="3958944284"/>
-            <div className="add_friend_btn">
-            	<a href="../html/addUser.html"><img src={add_friend_btn} className="add_friend_btn_icon" />
-            	<span>添加用户</span></a>
-            </div>
-        </div>
-        <FooterFixedBar />
-    </div>,
+render(
+    (
+        <Router history={hashHistory}>
+            <Route path="/" component={Home}>
+                <IndexRoute component={HomeContent} />
+                <Route path="register" component={Register}>
+                    <IndexRoute component={Register} />
+                </Route>
+                <Route path="*" component={HomeContent} />
+            </Route>
+        </Router>
+    ),
     document.getElementById('homePage')
 );
 
-
+/*
+ <Router history={hashHistory}>
+ <Route path="/" component={Home}>
+ <IndexRoute component={Home} />
+ <Route path="about" component={About} />
+ <Route path="inbox" component={Inbox} />
+ </Route>
+ </Router>
+ */

@@ -7,6 +7,7 @@
 
 // es6
 import React from 'react';
+import {Link} from 'react-router';
 import './FooterFixedBar.less';
 var boxStyle={
     position:'absolute',
@@ -22,28 +23,44 @@ var boxStyle={
 
 
 class FooterFixedBar extends React.Component {
-    handleClick(e){
-        //console.log(e.target);
-        //alert(e.target.className);
+    constructor(props){
+        super(props);
+        this.handleClick=this.handleClick.bind(this);//绑定在这里效率更高
+
     };
-    render(){
+    handleClick(e,addr){
+        //console.log(this);
+        //console.log(addr);
+        //console.log(e.target.className);
+        //alert(e.target.className);
+        //location.href=addr;
+    };
+    render() {
         return (
             <div className="footerFixedBar" style={boxStyle}>
-                <div className="footerFixedBar-item item1 on" onClick={this.handleClick}>
-                    <div className="img"></div>
-                    <p className="text">健康档案</p>
+                <div className="footerFixedBar-item item1 on" onClick={(e,addr) => {this.handleClick(e,'#/')}}>
+                    <Link to="/">
+                        <div className="img"></div>
+                        <p className="text">健康档案</p>
+                    </Link>
                 </div>
-                <div className="footerFixedBar-item item2" onClick={this.handleClick}>
-                    <div className="img"></div>
-                    <p className="text">预约挂号</p>
+                <div className="footerFixedBar-item item2" onClick={(e,addr) => {this.handleClick(e,'#/register')}}>
+                    <Link to="register">
+                        <div className="img"></div>
+                        <p className="text">预约挂号</p>
+                    </Link>
                 </div>
-                <div className="footerFixedBar-item item3" onClick={this.handleClick}>
-                    <div className="img"></div>
-                    <p className="text">缴费充值</p>
+                <div className="footerFixedBar-item item3" onClick={(e,addr) => {this.handleClick(e,'#/charge')}}>
+                    <Link to="charge">
+                        <div className="img"></div>
+                        <p className="text">缴费充值</p>
+                    </Link>
                 </div>
-                <div className="footerFixedBar-item item4" onClick={this.handleClick}>
-                    <div className="img"></div>
-                    <p className="text">养生知识</p>
+                <div className="footerFixedBar-item item4" onClick={(e,addr) => {this.handleClick(e,'#/healthLife')}}>
+                    <Link to="healthLife">
+                        <div className="img"></div>
+                        <p className="text">养生知识</p>
+                    </Link>
                 </div>
             </div>
         );
