@@ -21,8 +21,10 @@ class HomeContent extends React.Component{
                 <UserItem name="李小敏" img={defaultUserPic} male="false" idno="395593284"/>
                 <UserItem name="小明" img={defaultUserPic} male="true" idno="3958944284"/>
                 <div className="add_friend_btn">
-                    <a href="../html/addUser.html"><img src={add_friend_btn} className="add_friend_btn_icon" />
-                        <span>添加用户</span></a>
+                    <a href="../html/addUser.html">
+                        <img src={add_friend_btn} className="add_friend_btn_icon" />
+                        <span>添加用户</span>
+                    </a>
                 </div>
             </div>
         );

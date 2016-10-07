@@ -35,29 +35,30 @@ class FooterFixedBar extends React.Component {
         //alert(e.target.className);
         //location.href=addr;
     };
+    //<!-- 根路由只会在精确匹配时，才具有activeClassName  -->
     render() {
         return (
             <div className="footerFixedBar" style={boxStyle}>
-                <div className="footerFixedBar-item item1 on" onClick={(e,addr) => {this.handleClick(e,'#/')}}>
-                    <Link to="/">
+                <div className="footerFixedBar-item item1">
+                    <Link to="/" activeClassName="on" onlyActiveOnIndex={true}>
                         <div className="img"></div>
                         <p className="text">健康档案</p>
                     </Link>
                 </div>
-                <div className="footerFixedBar-item item2" onClick={(e,addr) => {this.handleClick(e,'#/register')}}>
-                    <Link to="register">
+                <div className="footerFixedBar-item item2">
+                    <Link to="register" activeClassName="on">
                         <div className="img"></div>
                         <p className="text">预约挂号</p>
                     </Link>
                 </div>
-                <div className="footerFixedBar-item item3" onClick={(e,addr) => {this.handleClick(e,'#/charge')}}>
-                    <Link to="charge">
+                <div className="footerFixedBar-item item3">
+                    <Link to="charge" activeClassName="on">
                         <div className="img"></div>
                         <p className="text">缴费充值</p>
                     </Link>
                 </div>
-                <div className="footerFixedBar-item item4" onClick={(e,addr) => {this.handleClick(e,'#/healthLife')}}>
-                    <Link to="healthLife">
+                <div className="footerFixedBar-item item4">
+                    <Link to="healthLife" activeClassName="on">
                         <div className="img"></div>
                         <p className="text">养生知识</p>
                     </Link>
